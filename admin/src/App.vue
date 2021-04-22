@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import moduleMenu from "./models/adminApi/menu";
+import moduleMenu from "./models/system/menu";
 export default {
   created() {
     this.getAuthMenuList();
@@ -15,10 +15,11 @@ export default {
   methods: {
     getAuthMenuList() {
       moduleMenu.list().then((res) => {
-        if (res.data.code == 200) {
-          this.$storage.set("menuList", JSON.stringify(res.data.data));
-          this.$routerAuth.addRouterAuth(this.$router, res.data.data);
-        }
+        console.log(res)
+        // if (res.data.code == 200) {
+        //   this.$storage.set("menuList", JSON.stringify(res.data.data));
+        //   this.$routerAuth.addRouterAuth(this.$router, res.data.data);
+        // }
       });
     },
   },

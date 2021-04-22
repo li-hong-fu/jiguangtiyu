@@ -1,6 +1,12 @@
-.main-container .btn-section {
+.el-layout-right {
+  flex: 1;
+}
+.el-layout-right .el-header {
+  padding: 0;
+}
+.el-layout-right .main-container .btn-section {
   margin-bottom: 10px;
 }
-.main-container .btn-section button {
+.el-layout-right .main-container .btn-section button {
   width: 100px;
 }

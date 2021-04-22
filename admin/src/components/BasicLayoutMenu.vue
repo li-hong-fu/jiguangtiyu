@@ -64,6 +64,10 @@ export default {
   },
   created() {
     this.getRoutes();
+    // 根据分辨率来决定左侧是否切换
+    window.addEventListener("resize", () => {
+      this.initResize();
+    });
   },
   watch: {
     $route(to) {
@@ -71,6 +75,13 @@ export default {
     },
   },
   methods: {
+    initResize() {
+      if (document.body.clientWidth < 1200) {
+        this.$store.commit("updateCollapseStatus", true);
+      } else {
+        this.$store.commit("updateCollapseStatus", false);
+      }
+    },
     getRoutes() {
       const routes = JSON.parse(this.$storage.get("menuList"));
       this.filterRoutes = this.filterNavigator(routes);
@@ -140,6 +151,8 @@ export default {
     padding: 14px 0;
     p {
       margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 }

@@ -8,7 +8,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 import * as filters from './utils/filters'; // 全局过滤
 import msg from './utils/msg'; // 全局消息
 import Storage from './utils/storage'; // 本地存储
-import routerAuth from './router/routes';
+import routerAuth from './router/routes'; //路由处理
+import utils from './utils'; //公共处理文件
 
 Vue.config.productionTip = false
 
@@ -17,6 +18,7 @@ Vue.use(ElementUI);
 Vue.prototype.$routerAuth = routerAuth
 Vue.prototype.$msg = msg;
 Vue.prototype.$storage = Storage;
+Vue.prototype.$utils = utils;
 
 // 注册过滤器
 Object.keys(filters).forEach(key => {

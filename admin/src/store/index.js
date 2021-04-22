@@ -8,8 +8,12 @@ export default new Vuex.Store({
     collapse: false
   },
   mutations: {
-    updateCollapseStatus(state) {
-      state.collapse = !state.collapse;
+    updateCollapseStatus(state, status) {
+      if (status == null) {
+        state.collapse = !state.collapse;
+      } else {
+        state.collapse = status;
+      }
     }
   },
   actions: {

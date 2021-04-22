@@ -14,6 +14,12 @@ const router = new VueRouter({
       redirect: { name: "BasicLayout" },
       children: []
     },
+    // 登陆
+    {
+      path: '/login',
+      component: () => import('@/views/AccountLogin.vue')
+    },
+    // 404
     {
       path: '/404',
       name: 'Error404',

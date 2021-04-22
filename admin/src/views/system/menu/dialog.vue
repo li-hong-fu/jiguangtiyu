@@ -142,8 +142,8 @@ export default {
     };
   },
   created() {
-    const routes = JSON.parse(this.$storage.get("menuList"));
-    console.log(routes)
+    // const routes = JSON.parse(this.$storage.get("menuList"));
+    // console.log(routes)
   },
   methods: {
     onSubmit() {

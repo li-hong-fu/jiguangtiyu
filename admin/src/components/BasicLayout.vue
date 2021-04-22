@@ -37,9 +37,4 @@ export default {
 
 <style lang="less" scoped>
 @import url("../assets/css/common.css");
-
-.el-header {
-  padding: 0;
-  min-width: 1200px;
-}
 </style>
