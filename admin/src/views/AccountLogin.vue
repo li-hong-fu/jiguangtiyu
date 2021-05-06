@@ -70,6 +70,8 @@
 </template>
 
 <script>
+    import sign from "../models/sign/index";
+
     export default {
         data() {
             return {
@@ -77,60 +79,71 @@
                 passwordFrom: {
                     username: "",
                     password: "",
-                    checked: true
+                    checked: true,
                 },
                 smsFrom: {
                     phone: "",
                     password: "",
-                    checked: true
+                    checked: true,
                 },
                 smsRules: {
                     phone: [{
                             required: true,
                             message: "请输入手机号",
-                            trigger: "blur"
+                            trigger: "blur",
                         },
                         {
                             pattern: /^1[3456789]\d{9}$/,
                             message: "目前只支持中国大陆的手机号码",
-                            trigger: "blur"
-                        }
+                            trigger: "blur",
+                        },
                     ],
                     code: [{
                         required: true,
                         message: "请输入验证码",
-                        trigger: "blur"
-                    }]
+                        trigger: "blur",
+                    }, ],
                 },
                 passwordRules: {
                     username: [{
-                            required: true,
-                            message: "请输入用户名",
-                            trigger: "blur"
-                        }
-                    ],
+                        required: true,
+                        message: "请输入用户名",
+                        trigger: "blur",
+                    }, ],
                     password: [{
                         required: true,
                         message: "请输入密码",
-                        trigger: "blur"
-                    }]
+                        trigger: "blur",
+                    }, ],
                 },
                 buttonName: "获取验证码",
-                disabled: false
+                disabled: false,
             };
         },
         methods: {
             submitForm(formName) {
-                this.$refs[formName].validate(valid => {
+                this.$refs[formName].validate((valid) => {
                     if (valid) {
                         if (formName === "passwordFrom") {
-                            this.$router.replace({
-                                name: "DashboardGeneral"
+                            let username = this.passwordFrom.username;
+                            let password = this.passwordFrom.password;
+                            let params = {
+                                username,
+                                password,
+                            };
+
+                            sign.login(params).then((res) => {
+                                console.log(res.token)
+                                if (res.code === 200) {
+                                    this.$msg.success(res.msg);
+                                    this.$storage.set("token", res.token);
+                                    this.$router.push({
+                                        name:'MENU'
+                                    });
+                                }
                             });
                         } else {
-                            this.$router.replace({
-                                name: "DashboardGeneral"
-                            });
+                            console.log("短信登录");
                         }
                     }
                 });
@@ -140,7 +153,7 @@
                     return;
                 }
 
-                this.$refs.smsFrom.validateField("phone", errMsg => {
+                this.$refs.smsFrom.validateField("phone", (errMsg) => {
                     if (errMsg) return;
                     this.disabled = true;
 
@@ -156,8 +169,8 @@
                         }
                     }, 1000);
                 });
-            }
-        }
+            },
+        },
     };
 </script>
 

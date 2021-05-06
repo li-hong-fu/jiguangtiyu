@@ -83,44 +83,8 @@ export default {
       }
     },
     getRoutes() {
-      const routes = JSON.parse(this.$storage.get("menuList"));
-      this.filterRoutes = this.filterNavigator(routes);
-    },
-    filterNavigator(node) {
-      let result = [];
-      node.forEach((data) => {
-        if (data.type == 1) {
-          result.push({
-            children: [],
-            id: data.id,
-            code: data.code,
-            path: data.router,
-            meta: {
-              nav: {
-                icon: data.icon,
-                title: data.name,
-              },
-            },
-          });
-        }
-
-        result.forEach((arr, index) => {
-          if (arr.id == data.pid) {
-            result[index].children.push({
-              path: data.router,
-              code: data.code,
-              meta: {
-                nav: {
-                  icon: data.icon,
-                  title: data.name,
-                },
-              },
-            });
-          }
-        });
-      });
-
-      return result;
+      let router = this.$router.options.routes;
+      this.filterRoutes = router[0].children;
     },
     hasNavChildren(route) {
       const children = route.children || [];

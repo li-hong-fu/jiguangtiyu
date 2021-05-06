@@ -15,6 +15,7 @@ router.post('/login', userController.login);
  * 菜单管理
  */
 router.get('/sys/menu/list', menuController.list);
+router.get('/sys/menu/list/:id', menuController.item);
 router.post('/sys/menu/add', menuController.insert);
 
 /**
