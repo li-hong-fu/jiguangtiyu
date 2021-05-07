@@ -38,8 +38,6 @@
   </div>
 </template>
 
-
-
 <script>
   import modeleMenu from "../../../models/system/menu";
   import Dialog from "@/views/system/menu/dialog.vue";
@@ -66,30 +64,56 @@
           if (res.code == 200) {
             let data = res.data;
             const oneMenuList = this.$utils.getCategory(data); // 索引0所有一级分类，索引1所有子类
-            this.tableData = this.$utils.getChildrenTree( oneMenuList, oneMenuList[0] ); // 按父子关系处理分类
-            this.tableList = this.$utils.getTreeToArray( this, this.tableData, null, null, false); // 按可伸展处理分类
-            this.$utils.getSorting(this.tableData)
+            this.tableData = this.$utils.getChildrenTree(
+              oneMenuList,
+              oneMenuList[0]
+            ); // 按父子关系处理分类
+            this.tableList = this.$utils.getTreeToArray(
+              this,
+              this.tableData,
+              null,
+              null,
+              false
+            ); // 按可伸展处理分类
           }
         });
       },
 
       onOpenWin(type, row = {}) {
-        this.tableRowId = row.id;
-        this.tableState = type;
-        this.$refs.addRefs.visible = true;
         if (type == "edit") {
-          this.tableRowPid = row.pid
+          this.tableRowPid = row.pid;
+          this.tableRowId = row.id;
+          this.tableState = type;
+          this.$refs.addRefs.visible = true;
         } else if (type == "del") {
           this.onDel(row.id);
+        } else {
+          this.tableRowId = row.id;
+          this.tableState = type;
+          this.$refs.addRefs.visible = true;
         }
       },
 
-      async onDel(id) {
-        console.log(id);
+      onDel(id) {
+        this.$confirm("确定删除吗？", "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          })
+          .then(() => {
+            modeleMenu.delete(id).then((res) => {
+              if (res.code == 200) {
+                this.$msg.success(res.data);
+                this.getList();
+              }
+            });
+          })
+          .catch(() => {
+            this.$msg.info("已取消删除");
+          });
       },
     },
   };
 </script>
 
-<style lang="less">
-</style>
+<style lang="less"></style>

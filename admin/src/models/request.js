@@ -45,6 +45,7 @@ const handleErrorRequest = error => {
             })
         } else {
             msg.error(message)
+            
         }
     } else {
         msg.error('网络超时')

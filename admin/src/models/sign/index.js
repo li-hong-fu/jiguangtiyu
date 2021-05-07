@@ -1,8 +1,8 @@
 import request from "../request";
-import api from "../api";
+import { login } from "../api/sign";
 
 export default {
     login: function (data) {
-        return request.post(api.login, data)
+        return request.post(login.login, data)
     }
 }

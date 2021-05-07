@@ -5,6 +5,7 @@ export default {
    * @return {array}
    */
     getCategory(categoryData, menuArr = []) {
+        this.getSorting(categoryData)
         categoryData.forEach((v) => {
             if (v.pid == 0) {
                 (menuArr[0] || (menuArr[0] = [])).push(v);

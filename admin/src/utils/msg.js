@@ -45,5 +45,19 @@ export default {
                 type: 'error'
             }
         );
+    },
+    /**
+     * 提示
+     * @param {string} value 消息
+     * @return {void}
+     */
+    info(msg) {
+        Message(
+            {
+                showClose: true,
+                message: msg,
+                type: 'info'
+            }
+        )
     }
 };

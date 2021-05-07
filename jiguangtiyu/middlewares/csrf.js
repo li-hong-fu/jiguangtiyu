@@ -26,7 +26,6 @@ const CSRF = {
         // 如果是没有关闭浏览器多次刷新的话，就有，使用原来的
         // 如果是新打开浏览器第一次请求的页面，没有就新建一个
         var token = req.session._csrf || (req.session._csrf = CSRF.generateRandom(24));
-        console.log(token)
         // 把token设置在本地数据中，页面获取本地数据渲染到页面
         res.locals.csrf = token;
         next();

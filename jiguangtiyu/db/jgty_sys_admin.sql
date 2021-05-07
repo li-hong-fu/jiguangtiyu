@@ -1,0 +1,1 @@
+INSERT INTO `jgty_sys_admin`(`uid`, `username`, `password`, `role_id`, `name`, `email`, `phone`, `created_time`, `update_time`, `status`, `remarks`) VALUES (1, 'admin', 'admin', NULL, '管理员', NULL, '13265117700', '2021-04-08 17:52:12', NULL, 1, NULL);
